@@ -122,7 +122,36 @@ class App
         );
 
         $signTicket = $this->getSignTicket();
-        $param['sign'] = $this->getSign($signTicket['tickets'][0]['value'], $param['userId']);
+        $data[] = $signTicket['tickets'][0]['value'];
+        $data[] = $param['userId'];
+        $param['sign'] = $this->getSign($data);
+        $param['appId'] = $this->appId;
+        $param['version'] = $this->version;
+        $param['nonce'] = $this->nonce;
+
+        return $this->post($url, $param);
+    }
+
+    /**
+     * 获取FaceId
+     * @return mixed
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
+    public function queryfacerecord($param)
+    {
+        //请求NONCE
+        $url = sprintf(
+            'https://kyc1.qcloud.com/api/v2/base/queryfacerecord?orderNo=%s',
+            $param['orderNo'],
+        );
+
+        $signTicket = $this->getSignTicket();
+
+        $data[] = $signTicket['tickets'][0]['value'];
+        $data[] = $param['orderNo'];
+
+        $param['sign'] = $this->getSign($data);
         $param['appId'] = $this->appId;
         $param['version'] = $this->version;
         $param['nonce'] = $this->nonce;
@@ -142,17 +171,14 @@ class App
     }
 
     /**
-     * @param $ticket
-     * @param $userId
+     * @param $data
      * @return string
      */
-    public function getSign($ticket, $userId): string
+    public function getSign($data): string
     {
         $data[] = $this->nonce;
         $data[] = $this->appId;
         $data[] = $this->version;
-        $data[] = $userId;
-        $data[] = $ticket;
 
         //将 appId、userId、version 连同 ticket、nonce 共五个参数的值进行字典序排序
         sort($data, SORT_STRING);

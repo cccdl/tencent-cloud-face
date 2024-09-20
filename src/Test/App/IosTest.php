@@ -70,7 +70,6 @@ class IosTest extends TestCase
         $userId = '5';
         $orderNo = $userId . time();
 
-
         $data = $ios->getFaceId([
             'orderNo' => $orderNo,
             'name' => '姓名',
@@ -82,4 +81,29 @@ class IosTest extends TestCase
         $this->assertArrayHasKey('code', $data);
         $this->assertArrayHasKey('msg', $data);
     }
+
+    /**
+     * @return void
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
+    public function testQueryfacerecord()
+    {
+        $config = Config::getConfig();
+        $ios = new App($config['WBappid'], $config['secret'], $config['license']);
+
+        $orderNo = '201726814064';
+
+        $data = $ios->queryfacerecord([
+            'orderNo' => $orderNo,
+            'getFile' => 1,
+        ]);
+
+        var_dump(json_encode($data));
+
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('code', $data);
+        $this->assertArrayHasKey('msg', $data);
+    }
+
 }
