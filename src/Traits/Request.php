@@ -27,13 +27,7 @@ trait Request
             throw new cccdlException('请求失败: ' . $response->getStatusCode());
         }
 
-        $arr = json_decode($response->getBody(), true);
-
-        if (!isset($arr['code']) || $arr['code'] != 0) {
-            throw new cccdlException('请求结果异常' . $response->getBody());
-        }
-
-        return $arr;
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -52,13 +46,7 @@ trait Request
             throw new cccdlException('请求失败: ' . $response->getStatusCode());
         }
 
-        $arr = json_decode($response->getBody(), true);
-
-        if (!isset($arr['code']) || $arr['code'] != 0) {
-            throw new cccdlException('请求结果异常' . $response->getBody());
-        }
-
-        return $arr;
+        return json_decode($response->getBody(), true);
     }
 
 }

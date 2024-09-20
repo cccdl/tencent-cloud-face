@@ -96,9 +96,7 @@ class IosTest extends TestCase
 
         $data = $ios->queryfacerecord([
             'orderNo' => $orderNo,
-            'getFile' => 1,
         ]);
-
 
         $this->assertIsArray($data);
         $this->assertArrayHasKey('code', $data);
