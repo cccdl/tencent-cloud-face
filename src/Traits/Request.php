@@ -23,6 +23,13 @@ trait Request
 
         $response = $client->get($url);
 
+
+//        var_dump($response);
+//        var_dump($response->getStatusCode());
+//        var_dump($response->getBody());
+        var_dump(json_decode($response->getBody(), true));
+
+
         if ($response->getStatusCode() != 200) {
             throw new cccdlException('请求失败: ' . $response->getStatusCode());
         }

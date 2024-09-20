@@ -17,11 +17,41 @@ class IosTest extends TestCase
      * @throws GuzzleException
      * @throws cccdlException
      */
-    public function testIos()
+    public function testGetAccessToken()
     {
         $config = Config::getConfig();
         $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
         $data = $ios->getAccessToken();
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('code', $data);
+        $this->assertArrayHasKey('msg', $data);
+    }
+
+    /**
+     * @return void
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
+    public function testGetNonceTicket()
+    {
+        $config = Config::getConfig();
+        $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
+        $data = $ios->getNonceTicket('5');
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('code', $data);
+        $this->assertArrayHasKey('msg', $data);
+    }
+
+    /**
+     * @return void
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
+    public function testGetSignTicket()
+    {
+        $config = Config::getConfig();
+        $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
+        $data = $ios->getSignTicket('5');
         $this->assertIsArray($data);
         $this->assertArrayHasKey('code', $data);
         $this->assertArrayHasKey('msg', $data);

@@ -12,21 +12,22 @@ class AppBase
 
 
     /**
-     * @var mixed
+     * @var string
      */
-    private $appId;
-    /**
-     * @var mixed
-     */
-    private $secret;
-    /**
-     * @var mixed
-     */
-    private $license;
+    private string $appId;
     /**
      * @var string
      */
-    private $nonce;
+    private string $secret;
+    /**
+     * @var string
+     */
+    private string $license;
+    /**
+     * @var string
+     */
+    private string $nonce;
+    private $accessToken = null;
 
     public function __construct($appid, $secret, $license)
 
@@ -55,9 +56,54 @@ class AppBase
         );
 
         return $this->get($url);
-
     }
 
+    /**
+     * 获取Nonce Ticket
+     * @param $userId
+     * @return array
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
+    public function getNonceTicket($userId): array
+    {
+
+        if ($this->accessToken == null) {
+            $this->accessToken = $this->getAccessToken()['access_token'];
+        }
+        //请求NONCE
+        $url = sprintf(
+            'https://kyc1.qcloud.com/api/oauth2/api_ticket?appId=%s&access_token=%s&type=NONCE&version=1.0.0&user_id=%d',
+            $this->appId,
+            $this->accessToken,
+            $userId
+        );
+
+        return $this->get($url);
+    }
+
+
+    /**
+     * 获取Nonce Ticket
+     * @return mixed
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
+    public function getSignTicket()
+    {
+        if ($this->accessToken == null) {
+            $this->accessToken = $this->getAccessToken()['access_token'];
+        }
+
+        //请求NONCE
+        $url = sprintf(
+            'https://kyc1.qcloud.com/api/oauth2/api_ticket?appId=%s&access_token=%s&type=SIGN&version=1.0.0',
+            $this->appId,
+            $this->accessToken,
+        );
+
+        return $this->get($url);
+    }
 
     /**
      * 根据长度生成随机字符串
