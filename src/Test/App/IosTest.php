@@ -99,7 +99,6 @@ class IosTest extends TestCase
             'getFile' => 1,
         ]);
 
-        var_dump(json_encode($data));
 
         $this->assertIsArray($data);
         $this->assertArrayHasKey('code', $data);
