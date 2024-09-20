@@ -109,12 +109,12 @@ class AppBase
     }
 
     /**
-     * 获取Nonce Ticket
+     * 获取FaceId
      * @return mixed
      * @throws GuzzleException
      * @throws cccdlException
      */
-    public function getFaceId($orderNo)
+    public function getFaceId($orderNo, $param)
     {
         //请求NONCE
         $url = sprintf(
@@ -122,8 +122,7 @@ class AppBase
             $orderNo,
         );
 
-
-        return $this->get($url);
+        return $this->post($url, $param);
     }
 
     /**
@@ -150,6 +149,8 @@ class AppBase
         $data[] = $userId;
         $data[] = $ticket;
 
+
+        var_dump($data);
         //将 appId、userId、version 连同 ticket、nonce 共五个参数的值进行字典序排序
         sort($data, SORT_STRING);
 

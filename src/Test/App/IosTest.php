@@ -51,7 +51,38 @@ class IosTest extends TestCase
     {
         $config = Config::getConfig();
         $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
-        $data = $ios->getSignTicket('5');
+        $data = $ios->getSignTicket();
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('code', $data);
+        $this->assertArrayHasKey('msg', $data);
+    }
+
+    /**
+     * @return void
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
+    public function testGetFaceId()
+    {
+        $config = Config::getConfig();
+        $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
+
+        $userId = '5';
+        $orderNo = $userId . time();
+
+        $signTicket = $ios->getSignTicket();
+
+        $data = $ios->getFaceId($orderNo, [
+            'appId' => $ios->appId,
+            'orderNo' => $orderNo,
+            'name' => '姓名',
+            'idNo' => '身份证号',
+            'userId' => $userId,
+            'version' => $ios->version,
+            'sign' => $ios->getSign($signTicket['tickets'][0]['value'], $userId),
+            'nonce' => $ios->nonce,
+        ]);
+
         $this->assertIsArray($data);
         $this->assertArrayHasKey('code', $data);
         $this->assertArrayHasKey('msg', $data);
