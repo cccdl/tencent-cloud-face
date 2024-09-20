@@ -15,7 +15,7 @@
 > 运行环境要求PHP7.1+。
 
 ```shell
-$ composer require ccccdl/tencent-cloud-face
+$ composer require cccdl/tencent_cloud_face
 ```
 
 ### 接口对应文件

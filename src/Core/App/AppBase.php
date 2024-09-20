@@ -28,6 +28,7 @@ class AppBase
      */
     private string $nonce;
     private $accessToken = null;
+    private $version = '1.0.0';
 
     public function __construct($appid, $secret, $license)
 
@@ -114,5 +115,28 @@ class AppBase
     {
         $str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         return substr(str_shuffle($str), 0, $len);
+    }
+
+    /**
+     * @param $ticket
+     * @param $userId
+     * @return string
+     */
+    public function getSign($ticket, $userId): string
+    {
+        $data[] = $this->nonce;
+        $data[] = $this->appId;
+        $data[] = $this->version;
+        $data[] = $userId;
+        $data[] = $ticket;
+
+        //将 appId、userId、version 连同 ticket、nonce 共五个参数的值进行字典序排序
+        sort($data, SORT_STRING);
+
+        //拼接字符串
+        $str = implode('', $data);
+
+        return sha1($str);
+
     }
 }
