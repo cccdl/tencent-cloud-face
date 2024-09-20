@@ -10,8 +10,15 @@
   },
   "authors": [
     {
-      "name": "dlc"
+      "name": "dlc",
+      "email": "568078220@qq.com",
+      "role": "Developer"
     }
   ],
-  "require": {}
+  "require": {
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "9.6.x-dev"
+  }
 }
