@@ -20,9 +20,13 @@ $ composer require cccdl/tencent_cloud_face
 
 ### 接口对应文件
 
-| 文件         | 方法      | 说明           |
-|------------|---------|--------------|
-| Friend.php | `add()` | 加好友，两人保持好友关系 |
+| 文件      | 方法                 | 说明              |
+|---------|--------------------|-----------------|
+| App.php | `getAccessToken()` | 获取 Access Token |
+| App.php | `getNonceTicket()` | 获取NONCE Ticket  |
+| App.php | `getSignTicket()`  | 获取SIGN Ticket   |
+| App.php | `getFaceId()`      | 获取faceId        |
+| App.php | `getSign()`        | 签名方法            |
 
 ```php
 <?php

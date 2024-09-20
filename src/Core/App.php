@@ -1,13 +1,13 @@
 <?php
 
-namespace cccdl\tencent_cloud_face\Core\App;
+namespace cccdl\tencent_cloud_face\Core;
 
 use cccdl\tencent_cloud_face\Exception\cccdlException;
 use cccdl\tencent_cloud_face\Traits\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-class AppBase
+class App
 {
     use Request;
 
@@ -87,7 +87,7 @@ class AppBase
 
 
     /**
-     * 获取Nonce Ticket
+     * 获取SIGN Ticket
      * @return mixed
      * @throws GuzzleException
      * @throws cccdlException
@@ -149,8 +149,6 @@ class AppBase
         $data[] = $userId;
         $data[] = $ticket;
 
-
-        var_dump($data);
         //将 appId、userId、version 连同 ticket、nonce 共五个参数的值进行字典序排序
         sort($data, SORT_STRING);
 

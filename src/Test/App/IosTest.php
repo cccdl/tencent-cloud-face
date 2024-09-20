@@ -2,7 +2,7 @@
 
 namespace cccdl\tencent_cloud_face\Test\App;
 
-use cccdl\tencent_cloud_face\Core\App\Ios;
+use cccdl\tencent_cloud_face\Core\App;
 use cccdl\tencent_cloud_face\Exception\cccdlException;
 use cccdl\tencent_cloud_face\Test\Config;
 use GuzzleHttp\Exception\GuzzleException;
@@ -20,7 +20,7 @@ class IosTest extends TestCase
     public function testGetAccessToken()
     {
         $config = Config::getConfig();
-        $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
+        $ios = new App($config['WBappid'], $config['secret'], $config['license']);
         $data = $ios->getAccessToken();
         $this->assertIsArray($data);
         $this->assertArrayHasKey('code', $data);
@@ -35,7 +35,7 @@ class IosTest extends TestCase
     public function testGetNonceTicket()
     {
         $config = Config::getConfig();
-        $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
+        $ios = new App($config['WBappid'], $config['secret'], $config['license']);
         $data = $ios->getNonceTicket('5');
         $this->assertIsArray($data);
         $this->assertArrayHasKey('code', $data);
@@ -50,7 +50,7 @@ class IosTest extends TestCase
     public function testGetSignTicket()
     {
         $config = Config::getConfig();
-        $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
+        $ios = new App($config['WBappid'], $config['secret'], $config['license']);
         $data = $ios->getSignTicket();
         $this->assertIsArray($data);
         $this->assertArrayHasKey('code', $data);
@@ -65,7 +65,7 @@ class IosTest extends TestCase
     public function testGetFaceId()
     {
         $config = Config::getConfig();
-        $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
+        $ios = new App($config['WBappid'], $config['secret'], $config['license']);
 
         $userId = '5';
         $orderNo = $userId . time();
