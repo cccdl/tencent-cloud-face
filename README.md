@@ -20,17 +20,18 @@ $ composer require cccdl/tencent_cloud_face
 
 ### 接口对应文件
 
-| 文件      | 方法                 | 说明              |
-|---------|--------------------|-----------------|
-| App.php | `getAccessToken()` | 获取 Access Token |
-| App.php | `getNonceTicket()` | 获取NONCE Ticket  |
-| App.php | `getSignTicket()`  | 获取SIGN Ticket   |
-| App.php | `getFaceId()`      | 获取faceId        |
-| App.php | `getSign()`        | 签名方法            |
+| 文件      | 方法                  | 说明              |
+|---------|---------------------|-----------------|
+| App.php | `getAccessToken()`  | 获取 Access Token |
+| App.php | `getNonceTicket()`  | 获取NONCE Ticket  |
+| App.php | `getSignTicket()`   | 获取SIGN Ticket   |
+| App.php | `getFaceId()`       | 获取faceId        |
+| App.php | `getSign()`         | 签名方法            |
+| App.php | `queryfacerecord()` | 服务器获取结果         |
 
-```php
-<?php
-
+```使用方法
+查看test文件夹内的测试文件
+如：testQueryfacerecord 方法
 ```
 
 ## 文档

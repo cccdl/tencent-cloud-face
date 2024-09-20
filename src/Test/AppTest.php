@@ -1,16 +1,15 @@
 <?php
 
-namespace cccdl\tencent_cloud_face\Test\App;
+namespace cccdl\tencent_cloud_face\Test;
 
 use cccdl\tencent_cloud_face\Core\App;
 use cccdl\tencent_cloud_face\Exception\cccdlException;
-use cccdl\tencent_cloud_face\Test\Config;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 
-require '../../../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
-class IosTest extends TestCase
+class AppTest extends TestCase
 {
     /**
      * @return void
