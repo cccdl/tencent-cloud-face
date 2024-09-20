@@ -4,6 +4,7 @@ namespace cccdl\tencent_cloud_face\Core\App;
 
 use cccdl\tencent_cloud_face\Exception\cccdlException;
 use cccdl\tencent_cloud_face\Traits\Request;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class AppBase
@@ -29,6 +30,7 @@ class AppBase
     public string $nonce;
     public $accessToken = null;
     public $version = '1.0.0';
+    private Client $client;
 
     public function __construct($appid, $secret, $license)
 
@@ -107,6 +109,24 @@ class AppBase
     }
 
     /**
+     * 获取Nonce Ticket
+     * @return mixed
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
+    public function getFaceId($orderNo)
+    {
+        //请求NONCE
+        $url = sprintf(
+            'https://kyc1.qcloud.com/api/server/getfaceid?orderNo=%s',
+            $orderNo,
+        );
+
+
+        return $this->get($url);
+    }
+
+    /**
      * 根据长度生成随机字符串
      * @param $len
      * @return string
@@ -139,4 +159,6 @@ class AppBase
         return sha1($str);
 
     }
+
+
 }

@@ -17,18 +17,36 @@ trait Request
      */
     public function get($url)
     {
-        $client = new Client([
+        $this->client = new Client([
             'timeout' => self::$timeOut,
         ]);
 
-        $response = $client->get($url);
+        $response = $this->client->get($url);
 
+        if ($response->getStatusCode() != 200) {
+            throw new cccdlException('请求失败: ' . $response->getStatusCode());
+        }
 
-//        var_dump($response);
-//        var_dump($response->getStatusCode());
-//        var_dump($response->getBody());
-        var_dump(json_decode($response->getBody(), true));
+        $arr = json_decode($response->getBody(), true);
 
+        if (!isset($arr['code']) || $arr['code'] != 0) {
+            throw new cccdlException('请求结果异常' . $response->getBody());
+        }
+
+        return $arr;
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
+    public function post($url, $param)
+    {
+        $this->client = new Client([
+            'timeout' => self::$timeOut,
+        ]);
+
+        $response = $this->client->post($url, ['json' => $param]);
 
         if ($response->getStatusCode() != 200) {
             throw new cccdlException('请求失败: ' . $response->getStatusCode());
