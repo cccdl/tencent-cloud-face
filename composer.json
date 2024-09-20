@@ -1,11 +1,11 @@
 {
-  "name": "ccccdl/tencent-cloud-face",
+  "name": "ccccdl/tencent_cloud_face",
   "description": "腾讯云-人脸核身",
   "type": "library",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "ccccdl\\tencent-cloud-face\\": "src/"
+      "ccccdl\\tencent_cloud_face\\": "src/"
     }
   },
   "authors": [
