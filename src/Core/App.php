@@ -70,7 +70,6 @@ class App
      */
     public function getNonceTicket($userId): array
     {
-
         if ($this->accessToken == null) {
             $this->accessToken = $this->getAccessToken()['access_token'];
         }
@@ -114,13 +113,19 @@ class App
      * @throws GuzzleException
      * @throws cccdlException
      */
-    public function getFaceId($orderNo, $param)
+    public function getFaceId($param)
     {
         //请求NONCE
         $url = sprintf(
             'https://kyc1.qcloud.com/api/server/getfaceid?orderNo=%s',
-            $orderNo,
+            $param['orderNo'],
         );
+
+        $signTicket = $this->getSignTicket();
+        $param['sign'] = $this->getSign($signTicket['tickets'][0]['value'], $param['userId']);
+        $param['appId'] = $this->appId;
+        $param['version'] = $this->version;
+        $param['nonce'] = $this->nonce;
 
         return $this->post($url, $param);
     }

@@ -70,17 +70,12 @@ class IosTest extends TestCase
         $userId = '5';
         $orderNo = $userId . time();
 
-        $signTicket = $ios->getSignTicket();
 
-        $data = $ios->getFaceId($orderNo, [
-            'appId' => $ios->appId,
+        $data = $ios->getFaceId([
             'orderNo' => $orderNo,
             'name' => '姓名',
             'idNo' => '身份证号',
             'userId' => $userId,
-            'version' => $ios->version,
-            'sign' => $ios->getSign($signTicket['tickets'][0]['value'], $userId),
-            'nonce' => $ios->nonce,
         ]);
 
         $this->assertIsArray($data);
