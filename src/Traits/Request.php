@@ -29,7 +29,7 @@ trait Request
 
         $arr = json_decode($response->getBody(), true);
 
-        if (!isset($arr['code']) || $arr['code'] != 200) {
+        if (!isset($arr['code']) || $arr['code'] != 0) {
             throw new cccdlException('请求结果异常' . $response->getBody());
         }
 

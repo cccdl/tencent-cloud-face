@@ -2,8 +2,9 @@
 
 namespace cccdl\tencent_cloud_face\Core\App;
 
+use cccdl\tencent_cloud_face\Exception\cccdlException;
 use cccdl\tencent_cloud_face\Traits\Request;
-use youyin\common\utils\StringUtils;
+use GuzzleHttp\Exception\GuzzleException;
 
 class AppBase
 {
@@ -40,9 +41,11 @@ class AppBase
     /**
      * 获取 Access Token
      * 文档地址：https://cloud.tencent.com/document/product/1007/37304
-     * @return void
+     * @return array
+     * @throws GuzzleException
+     * @throws cccdlException
      */
-    public function getAccessToken()
+    public function getAccessToken(): array
     {
         //请求access_token
         $url = sprintf(
@@ -51,7 +54,7 @@ class AppBase
             $this->secret
         );
 
-        var_dump($url);
+        return $this->get($url);
 
     }
 

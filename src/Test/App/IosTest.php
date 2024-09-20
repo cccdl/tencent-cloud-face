@@ -3,15 +3,27 @@
 namespace cccdl\tencent_cloud_face\Test\App;
 
 use cccdl\tencent_cloud_face\Core\App\Ios;
+use cccdl\tencent_cloud_face\Exception\cccdlException;
 use cccdl\tencent_cloud_face\Test\Config;
+use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
+
+require '../../../vendor/autoload.php';
 
 class IosTest extends TestCase
 {
+    /**
+     * @return void
+     * @throws GuzzleException
+     * @throws cccdlException
+     */
     public function testIos()
     {
         $config = Config::getConfig();
         $ios = new Ios($config['WBappid'], $config['secret'], $config['license']);
-        $ios->getAccessToken();
+        $data = $ios->getAccessToken();
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('code', $data);
+        $this->assertArrayHasKey('msg', $data);
     }
 }
