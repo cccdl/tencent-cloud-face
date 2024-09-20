@@ -14,21 +14,21 @@ class AppBase
     /**
      * @var string
      */
-    private string $appId;
+    public string $appId;
     /**
      * @var string
      */
-    private string $secret;
+    public string $secret;
     /**
      * @var string
      */
-    private string $license;
+    public string $license;
     /**
      * @var string
      */
-    private string $nonce;
-    private $accessToken = null;
-    private $version = '1.0.0';
+    public string $nonce;
+    public $accessToken = null;
+    public $version = '1.0.0';
 
     public function __construct($appid, $secret, $license)
 
